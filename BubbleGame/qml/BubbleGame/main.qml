@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "BubbleGameScripting.js" as BubbleGameScripting
+
 Rectangle {
     id: screen
 
@@ -28,7 +30,10 @@ Rectangle {
         StartButton {
             anchors { left: parent.left; verticalCenter: parent.verticalCenter }
             text: "New Game"
-            onClicked: console.log("This doesn't do anything yet...")
+            onClicked: {
+                console.log("This doesn't do anything yet...");
+                BubbleGameScripting.startNewGame();
+            }
         }
 
         Text {
