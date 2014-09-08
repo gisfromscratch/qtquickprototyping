@@ -1,16 +1,40 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 360
-    height: 360
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    id: screen
+
+    width: 490; height: 720
+
+    SystemPalette { id: activePalette }
+
+    Item {
+        width: parent.width
+        anchors { top: parent.top; bottom: toolBar.top }
+
+        Image {
+            id: background
+            anchors.fill: parent
+            source: "qrc:///images/shared/pics/background.jpg"
+            fillMode: Image.PreserveAspectCrop
+        }
     }
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            Qt.quit();
+
+    Rectangle {
+        id: toolBar
+        width: parent.width; height: 30
+        color: activePalette.window
+        anchors.bottom: screen.bottom
+
+        StartButton {
+            anchors { left: parent.left; verticalCenter: parent.verticalCenter }
+            text: "New Game"
+            onClicked: console.log("This doesn't do anything yet...")
+        }
+
+        Text {
+            id: score
+            anchors { right: parent.right; verticalCenter: parent.verticalCenter }
+            text: "Score: Who knows?"
         }
     }
 }
