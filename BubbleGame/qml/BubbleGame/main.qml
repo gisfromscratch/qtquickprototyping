@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-import "BubbleGameScripting.js" as BubbleGameScripting
+import "BubbleGameScripting.js" as BubbleGameEngine
 
 Rectangle {
     id: screen
@@ -19,6 +19,29 @@ Rectangle {
             source: "qrc:///images/shared/pics/background.jpg"
             fillMode: Image.PreserveAspectCrop
         }
+
+        // The game canvas
+        Item {
+            id: gameCanvas
+
+            property int score: 0
+            property int blockSize: 40
+
+            width: parent.width - (parent.width % blockSize)
+            height: parent.height - (parent.height % blockSize)
+            anchors.centerIn: parent
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: BubbleGameEngine.handleClick(mouse.x, mouse.y)
+            }
+        }
+    }
+
+    GameDialog {
+        id: dialog
+        anchors.centerIn: parent
+        z: 100
     }
 
     Rectangle {
@@ -32,7 +55,7 @@ Rectangle {
             text: "New Game"
             onClicked: {
                 console.log("This doesn't do anything yet...");
-                BubbleGameScripting.startNewGame();
+                BubbleGameEngine.startNewGame();
             }
         }
 
